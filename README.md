@@ -87,7 +87,7 @@ Request:
   "operationType": "DEPOSIT",
   "amount": 1000
 }
-```
+
 
 Response (успех):
 {
@@ -98,17 +98,19 @@ Response (ошибка, недостаточно средств):
 {
   "error": "cannot withdraw: insufficient funds"
 }
+```
 
 GET /api/v1/wallets/{walletId}
 
 Возвращает текущий баланс кошелька.
 
+```bash
 Response:
 
 {
   "balance": 12345
 }
-
+```
 
 Тесты
 
@@ -122,14 +124,16 @@ Response:
 Обработку ошибок при недостатке средств
 
 Запуск тестов:
+```bash
 go test -v ./service_test
-    
+```
 
 Нагрузочное тестирование
 
 Пример проверки 1000 запросов с 50 конкурентными потоками:
+```bash
 hey -n 1000 -c 50 -m POST -H "Content-Type: application/json" -d '{"walletId":"11111111-1111-1111-1111-111111111111","operationType":"DEPOSIT","amount":10}' http://localhost:8080/api/v1/wallet
-
+```
 Результат: 0 ошибок (50X нет), ~2000 RPS на MacBook Pro.
 
 Миграции
@@ -144,6 +148,7 @@ hey -n 1000 -c 50 -m POST -H "Content-Type: application/json" -d '{"walletId":"1
 Примеры команд cURL
 
 Пополнить кошелёк:
+```bash
 curl -X POST http://localhost:8080/api/v1/wallet
  -H "Content-Type: application/json" -d '{"walletId":"11111111-1111-1111-1111-111111111111","operationType":"DEPOSIT","amount":500}'
 
@@ -153,3 +158,4 @@ curl -X POST http://localhost:8080/api/v1/wallet
 
 Проверить баланс:
 curl -X GET http://localhost:8080/api/v1/wallets/11111111-1111-1111-1111-111111111111
+```
