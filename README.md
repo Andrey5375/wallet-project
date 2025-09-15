@@ -56,32 +56,38 @@
 ```bash
 git clone https://github.com/Andrey5375/wallet-project.git
 cd wallet-project
-
+```
 2. Создать файл config.env с переменными окружения:
+```bash
 PORT=8080
 DATABASE_URL=postgres://user:password@db:5432/wallet?sslmode=disable
 POSTGRES_USER=user
 POSTGRES_PASSWORD=password
 POSTGRES_DB=wallet
+```
 
 3. Поднять сервис и базу через Docker Compose:
+```bash
 docker-compose up --build
+```
 
 4. Приложение будет доступно на:
+```bash
 http://localhost:8080
-
+```
 
 API
 POST /api/v1/wallet
 
 Выполняет операцию DEPOSIT или WITHDRAW.
-
+```bash
 Request:
 {
   "walletId": "11111111-1111-1111-1111-111111111111",
   "operationType": "DEPOSIT",
   "amount": 1000
 }
+```
 
 Response (успех):
 {
