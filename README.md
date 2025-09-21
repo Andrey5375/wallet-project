@@ -20,18 +20,28 @@
 ## Структура проекта
 ```bash
 wallet-project/
+│── cmd/
+│   └── server/                # Точка входа в приложение (main.go)
+│
 │── internal/
-│ ├── app/ # HTTP-сервер и обработчики
-│ ├── service/ # Логика работы с кошельками
-│ ├── repo/ # Репозиторий PostgreSQL
+│   ├── api/                   # REST API (роутинг, эндпоинты, v1/wallet)
+│   ├── app/                   # Инициализация HTTP-сервера и зависимостей
+│   ├── service/               # Бизнес-логика (операции с кошельками: deposit, withdraw, balance)
+│   ├── repo/                  # Работа с PostgreSQL (хранение и транзакции по кошелькам)
+│
 │── pkg/
-│ └── config/ # Загрузка конфигурации
-│── service_test/ # Тесты (deposit/withdraw + конкурентные)
-│── migrations/ # SQL-скрипты для создания таблиц
-│── Dockerfile
-│── docker-compose.yml
-│── config.env
-│── README.md
+│   ├── config/                # Загрузка конфигурации из config.env
+│   └── logger/                # Логирование (уровни логов, формат вывода)
+│
+│── service_test/              # Тесты (юнит + конкурентные тесты на депозит/снятие)
+│
+│── migrations/                # SQL-скрипты для создания и миграции таблиц
+│
+│── Dockerfile                 # Docker-образ приложения
+│── docker-compose.yml         # Поднятие сервиса и PostgreSQL
+│── config.env                 # Переменные окружения (DB_URL, PORT и т.д.)
+│── README.md                  # Документация по запуску проекта
+
 ```
 
 ## Запуск проекта
